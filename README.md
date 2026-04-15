@@ -15,14 +15,42 @@
 
 ---
 
-## 在线演示（GitHub Pages）
+## 部署到 Vercel（推荐，和常见「一键上线」一样）
+
+效果和体验最接近 **Vercel 默认流程**：连上 GitHub 仓库后，每次推代码自动构建，得到一个 **`https://你的项目名.vercel.app`** 这种外网地址，别人打开即可访问。
+
+### 最快方式（浏览器里点几下）
+
+1. 打开 **[在 Vercel 导入本仓库](https://vercel.com/new?import=https://github.com/ShiChaoJieCoder/cj-ai-powered-web-design)**（需先登录 Vercel，可用 GitHub 账号授权）。  
+2. **Project Name** 可自定（会决定默认域名，例如 `cj-ai-web` → `cj-ai-web.vercel.app`）。  
+3. **Framework Preset** 一般会识别为 **Vite**；若没有，手动选 **Vite** 或保持自动。  
+4. **Build Command** 保持 `npm run build`，**Output Directory** 保持 **`dist`**（仓库根目录已有 [`vercel.json`](vercel.json) 写明，通常无需改）。  
+5. 点 **Deploy**，约 1～2 分钟完成后页面会给出 **Visit** 链接，复制发给外网即可。
+
+### 环境变量注意
+
+本项目在 **GitHub Pages** 子路径下才需要设置 `VITE_BASE_PATH`。  
+部署在 **Vercel 根路径** 时 **不要** 在 Vercel 里配置 `VITE_BASE_PATH`（留空即可），否则静态资源路径会错。
+
+### CLI（可选）
+
+```bash
+npm i -g vercel   # 或 npx vercel@latest
+cd /path/to/this-repo
+vercel            # 按提示链接 GitHub 或上传当前目录
+vercel --prod     # 生产环境
+```
+
+---
+
+## 在线演示（GitHub Pages，可选）
 
 **预览地址（工作流跑通且 Pages 已开启后生效）：**  
 [https://shichaojiecoder.github.io/cj-ai-powered-web-design/](https://shichaojiecoder.github.io/cj-ai-powered-web-design/)
 
-部署工作流模板在 **[`docs/github-pages-deploy.yml`](docs/github-pages-deploy.yml)**（因部分环境 Git 凭据无 `workflow` 权限，未强制放在 `.github/workflows/`）。任选一种方式启用：
+部署工作流模板在 **[`docs/github-pages-deploy.yml`](docs/github-pages-deploy.yml)**。任选一种方式启用：
 
-### 方式 A：在 GitHub 网页上新建工作流（推荐，约 1 分钟）
+### 方式 A：在 GitHub 网页上新建工作流（约 1 分钟）
 
 1. 打开仓库 → **Add file** → **Create new file**  
 2. 文件名填：**`.github/workflows/deploy-github-pages.yml`**（含路径）  
@@ -163,8 +191,9 @@ npm run preview  # 本地预览生产构建
 
 ## 部署建议
 
-- **本仓库默认**：GitHub Actions → GitHub Pages（见上文「在线演示」）。
-- 其他静态托管（Cloudflare Pages、Vercel、Netlify）：构建命令 `npm run build`，发布目录 **`dist`**；若站点不在域名根路径，构建前设置环境变量 **`VITE_BASE_PATH`**（须以 `/` 开头和结尾，例如 `/repo-name/`），与 `vite.config.ts` 中的 `base` 逻辑一致。
+- **首选**：上文 **[部署到 Vercel](#部署到-vercel推荐和常见一键上线一样)**，得到 `*.vercel.app` 固定外网地址。  
+- **可选**：GitHub Pages（见「在线演示」）；子路径部署需在 CI 中设置 `VITE_BASE_PATH`。  
+- **其他**：Cloudflare Pages、Netlify 等同理：`npm run build`，输出 **`dist`**；非根路径时设置 **`VITE_BASE_PATH`**。
 
 ---
 
