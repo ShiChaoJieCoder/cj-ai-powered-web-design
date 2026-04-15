@@ -21,7 +21,10 @@
 
 ### 最快方式（浏览器里点几下）
 
-1. 打开 **[在 Vercel 导入本仓库](https://vercel.com/new?import=https://github.com/ShiChaoJieCoder/cj-ai-powered-web-design)**（需先登录 Vercel，可用 GitHub 账号授权）。  
+1. 打开下面任一链接（**不要**使用带 `buildCommand=npm%20run%20build` 的旧导入链接，否则向导会强行用 npm，和本仓库的 **pnpm** 不一致）：  
+   - **推荐（无多余参数）：** [在 Vercel 导入本仓库](https://vercel.com/new/import?provider=github&s=https%3A%2F%2Fgithub.com%2FShiChaoJieCoder%2Fcj-ai-powered-web-design)  
+   - **备选：** [vercel.com/new?import=…](https://vercel.com/new?import=https://github.com/ShiChaoJieCoder/cj-ai-powered-web-design)  
+   需先登录 Vercel（可用 GitHub 授权）。  
 2. **Project Name** 可自定（会决定默认域名，例如 `cj-ai-web` → `cj-ai-web.vercel.app`）。  
 3. **Framework Preset** 一般会识别为 **Vite**；若没有，手动选 **Vite** 或保持自动。  
 4. **Build / Install**：以仓库根目录 [`vercel.json`](vercel.json) 为准（使用 **pnpm** 安装依赖、`pnpm run build` 构建，**`dist`** 输出）。在 Vercel 上 **Build Command / Install Command 的 Override 建议保持关闭**，避免与仓库配置冲突。  
