@@ -15,6 +15,39 @@
 
 ---
 
+## 在线演示（GitHub Pages）
+
+**预览地址（工作流跑通且 Pages 已开启后生效）：**  
+[https://shichaojiecoder.github.io/cj-ai-powered-web-design/](https://shichaojiecoder.github.io/cj-ai-powered-web-design/)
+
+部署工作流模板在 **[`docs/github-pages-deploy.yml`](docs/github-pages-deploy.yml)**（因部分环境 Git 凭据无 `workflow` 权限，未强制放在 `.github/workflows/`）。任选一种方式启用：
+
+### 方式 A：在 GitHub 网页上新建工作流（推荐，约 1 分钟）
+
+1. 打开仓库 → **Add file** → **Create new file**  
+2. 文件名填：**`.github/workflows/deploy-github-pages.yml`**（含路径）  
+3. 把本地 [`docs/github-pages-deploy.yml`](docs/github-pages-deploy.yml) 的**全部内容**粘贴进去（可删掉文件顶部的说明注释），**Commit to main**  
+4. 按下面「首次开启 Pages」完成设置，等待 Actions 绿勾即可访问线上地址。
+
+### 方式 B：本机有 `workflow` 权限后推送
+
+```bash
+gh auth refresh -h github.com -s workflow
+cp docs/github-pages-deploy.yml .github/workflows/deploy-github-pages.yml
+git add .github/workflows/deploy-github-pages.yml && git commit -m "ci: GitHub Pages" && git push
+```
+
+### 首次开启 Pages（只需做一次）
+
+1. 仓库 **Settings** → **Pages**  
+2. **Build and deployment** → **Source** 选 **GitHub Actions**  
+3. **Actions** 里查看 **Deploy GitHub Pages** 是否成功；失败可 **Re-run**  
+4. **Pages** 页会出现 **Visit site**（约 1～3 分钟）
+
+CI 构建会设置 `VITE_BASE_PATH=/cj-ai-powered-web-design/`，与 `https://<用户>.github.io/<仓库名>/` 路径一致，静态资源才能正确加载。
+
+---
+
 ## 技术栈
 
 | 类别 | 选型 |
@@ -130,9 +163,8 @@ npm run preview  # 本地预览生产构建
 
 ## 部署建议
 
-- 任意支持 **静态资源托管** 的平台即可（如 GitHub Pages、Cloudflare Pages、Vercel、Netlify）。
-- 构建命令：`npm run build`，发布目录：`dist`。
-- 若部署在子路径，需在 `vite.config.ts` 中配置 `base: '/子路径/'`。
+- **本仓库默认**：GitHub Actions → GitHub Pages（见上文「在线演示」）。
+- 其他静态托管（Cloudflare Pages、Vercel、Netlify）：构建命令 `npm run build`，发布目录 **`dist`**；若站点不在域名根路径，构建前设置环境变量 **`VITE_BASE_PATH`**（须以 `/` 开头和结尾，例如 `/repo-name/`），与 `vite.config.ts` 中的 `base` 逻辑一致。
 
 ---
 
