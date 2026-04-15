@@ -24,17 +24,19 @@
 1. 打开 **[在 Vercel 导入本仓库](https://vercel.com/new?import=https://github.com/ShiChaoJieCoder/cj-ai-powered-web-design)**（需先登录 Vercel，可用 GitHub 账号授权）。  
 2. **Project Name** 可自定（会决定默认域名，例如 `cj-ai-web` → `cj-ai-web.vercel.app`）。  
 3. **Framework Preset** 一般会识别为 **Vite**；若没有，手动选 **Vite** 或保持自动。  
-4. **Build Command** 保持 `npm run build`，**Output Directory** 保持 **`dist`**（仓库根目录已有 [`vercel.json`](vercel.json) 写明，通常无需改）。  
+4. **Build / Install**：以仓库根目录 [`vercel.json`](vercel.json) 为准（使用 **pnpm** 安装依赖、`pnpm run build` 构建，**`dist`** 输出）。在 Vercel 上 **Build Command / Install Command 的 Override 建议保持关闭**，避免与仓库配置冲突。  
 5. 点 **Deploy**，约 1～2 分钟完成后页面会给出 **Visit** 链接，复制发给外网即可。
+
+**本地开发**：仓库使用 [pnpm](https://pnpm.io/)（见 `package.json` 的 `packageManager` 字段）。首次克隆后执行：`corepack enable && pnpm install`，再 `pnpm dev` / `pnpm build`。
 
 ### 环境变量注意
 
 本项目在 **GitHub Pages** 子路径下才需要设置 `VITE_BASE_PATH`。  
 部署在 **Vercel 根路径** 时 **不要** 配置 `VITE_BASE_PATH`（留空即可），否则静态资源路径会错。
 
-**若构建报「找不到 vite / typescript」等：** 检查 Vercel 项目 **Environment Variables** 里是否把 **`NODE_ENV=production`** 设成了全局；该变量会在 **`npm install` 阶段** 就生效，导致 **不安装 `devDependencies`**。解决办法：删掉该变量，或把 Install Command 改成 `npm install --production=false`（见 [Vercel 说明](https://vercel.com/guides/dependencies-from-package-json-missing-after-install)）。本仓库已将 **Vite / TypeScript / Sass 等放进 `dependencies`**，一般可避免因上述配置导致的安装失败。
+**若构建报「找不到 vite / typescript / tsc」等：** 多为依赖未装全。请确认 Vercel **Environment Variables** 里没有不当的全局 **`NODE_ENV=production`**（在部分包管理器下会影响安装行为）；并确认 **Install Command 未被 Dashboard Override 覆盖**。当前构建工具均在 **`dependencies`** 且安装走 **pnpm**。
 
-**若安装阶段报 `npm error Exit handler never called`：** 多为 CI 上 `npm install` 偶发 bug 或资源压力。仓库已改为在 **`vercel.json`** 里使用 **`npm ci --no-audit --no-fund`**，并在 **`.npmrc`** 中关闭 audit/fund、限制并发，通常更稳。部署页里 **Install Command 可以保持 Override 关闭**（以仓库 `vercel.json` 为准）。无关的环境变量（如截图里的 `EXAMPLE_NAME`）建议删掉，避免干扰排查。
+**若 Vercel 安装阶段曾报 `npm error Exit handler never called`：** 属于 npm 在 CI 上的已知不稳定情况。仓库已改为使用 **pnpm**（`pnpm-lock.yaml` + `package.json` 的 `packageManager` + `vercel.json` 的 `installCommand`），在 Vercel 上通常可稳定通过安装。请确保 **Install / Build 的 Override 关闭**，以免覆盖仓库配置。无关环境变量请删掉。
 
 ### CLI（可选）
 
@@ -121,6 +123,7 @@ beauty/
 ├── vite.config.ts          # Vite + React 插件
 ├── tsconfig.json           # TS 严格模式、含 vite.config
 ├── package.json
+├── pnpm-lock.yaml           # 锁定依赖；Vercel / CI 使用 pnpm
 ├── public/
 │   └── vite.svg
 ├── src/
@@ -176,8 +179,9 @@ beauty/
 ## 本地开发
 
 ```bash
-npm install
-npm run dev
+corepack enable
+pnpm install
+pnpm dev
 ```
 
 默认开发地址：<http://localhost:5173/>
@@ -187,8 +191,8 @@ npm run dev
 ## 构建与预览
 
 ```bash
-npm run build    # tsc 类型检查 + vite build，产物在 dist/
-npm run preview  # 本地预览生产构建
+pnpm build     # tsc + vite build，产物在 dist/
+pnpm preview   # 本地预览生产构建
 ```
 
 ---
@@ -197,7 +201,7 @@ npm run preview  # 本地预览生产构建
 
 - **首选**：上文 **[部署到 Vercel](#部署到-vercel推荐和常见一键上线一样)**，得到 `*.vercel.app` 固定外网地址。  
 - **可选**：GitHub Pages（见「在线演示」）；子路径部署需在 CI 中设置 `VITE_BASE_PATH`。  
-- **其他**：Cloudflare Pages、Netlify 等同理：`npm run build`，输出 **`dist`**；非根路径时设置 **`VITE_BASE_PATH`**。
+- **其他**：Cloudflare Pages、Netlify 等同理：`pnpm build`（或 `npm run build`），输出 **`dist`**；非根路径时设置 **`VITE_BASE_PATH`**。
 
 ---
 
