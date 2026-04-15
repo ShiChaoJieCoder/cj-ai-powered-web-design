@@ -30,7 +30,9 @@
 ### 环境变量注意
 
 本项目在 **GitHub Pages** 子路径下才需要设置 `VITE_BASE_PATH`。  
-部署在 **Vercel 根路径** 时 **不要** 在 Vercel 里配置 `VITE_BASE_PATH`（留空即可），否则静态资源路径会错。
+部署在 **Vercel 根路径** 时 **不要** 配置 `VITE_BASE_PATH`（留空即可），否则静态资源路径会错。
+
+**若构建报「找不到 vite / typescript」等：** 检查 Vercel 项目 **Environment Variables** 里是否把 **`NODE_ENV=production`** 设成了全局；该变量会在 **`npm install` 阶段** 就生效，导致 **不安装 `devDependencies`**。解决办法：删掉该变量，或把 Install Command 改成 `npm install --production=false`（见 [Vercel 说明](https://vercel.com/guides/dependencies-from-package-json-missing-after-install)）。本仓库已将 **Vite / TypeScript / Sass 等放进 `dependencies`**，一般可避免因上述配置导致的安装失败。
 
 ### CLI（可选）
 
