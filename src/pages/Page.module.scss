@@ -1,0 +1,555 @@
+@use "../styles/glass" as *;
+
+.page {
+  background: #000;
+  overflow-x: hidden;
+}
+
+.sectionPad {
+  padding: 5rem 1.5rem;
+  @media (min-width: 768px) {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.trustedClients {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  @media (min-width: 768px) {
+    gap: 3rem;
+  }
+}
+
+.clientName {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  color: #fff;
+  opacity: 0.6;
+  transition: opacity 0.25s;
+  cursor: default;
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.badge {
+  @include liquid-glass;
+  display: inline-block;
+  padding: 0.25rem 0.875rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #fff;
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+}
+
+.h2 {
+  font-family: var(--font-heading);
+  font-style: italic;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  margin: 0 0 1.5rem;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+}
+
+.h2Lg {
+  font-size: clamp(2.5rem, 6vw, 3.75rem);
+}
+
+.body {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
+  font-size: 0.875rem;
+  max-width: 32rem;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+.btnStrong {
+  @include liquid-glass-strong;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #fff;
+  border-radius: 9999px;
+  transition: background 0.2s;
+  &:hover {
+    background: rgba(255, 255, 255, 0.14);
+  }
+}
+
+.videoSection {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+  min-height: 700px;
+}
+
+.videoFill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.videoGradTop,
+.videoGradBottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  pointer-events: none;
+  height: 200px;
+}
+
+.videoGradTop {
+  top: 0;
+  background: linear-gradient(to bottom, #000, transparent);
+}
+
+.videoGradBottom {
+  bottom: 0;
+  background: linear-gradient(to top, #000, transparent);
+}
+
+.videoContent {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8rem 1.5rem;
+  min-height: 500px;
+  justify-content: center;
+  @media (min-width: 768px) {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+.capHeader {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.capRow {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+  }
+}
+
+.capText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.h3 {
+  font-family: var(--font-heading);
+  font-style: italic;
+  color: #fff;
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.pDim {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 300;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.performanceGrid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  width: 100%;
+  @media (min-width: 640px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.perfCard {
+  @include liquid-glass;
+  border-radius: 20px;
+  padding: 1.5rem;
+}
+
+.ringWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ringOuter {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from -90deg,
+    rgba(255, 255, 255, 0.95) 0deg,
+    rgba(255, 255, 255, 0.95) 288deg,
+    rgba(255, 255, 255, 0.12) 288deg 360deg
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ringInner {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ringScore {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 2.25rem;
+  color: #fff;
+  line-height: 1;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.metricVal {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: #fff;
+}
+
+.metricDelta {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.metricLabel {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.lhRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.lhScore {
+  font-weight: 600;
+  color: #fff;
+}
+
+.engineCard {
+  @include liquid-glass;
+  border-radius: 20px;
+  padding: 1.5rem;
+  grid-column: 1 / -1;
+}
+
+.engineTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+}
+
+.engineTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 0.25rem;
+}
+
+.engineSub {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+.pillActive {
+  font-size: 0.65rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+  background: rgba(34, 197, 94, 0.2);
+  color: rgb(134, 239, 172);
+  font-weight: 500;
+}
+
+.progressTrack {
+  height: 6px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progressBar {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.5));
+  transition: width 0.8s ease;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  padding: 0.35rem 0;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.taskDone {
+  color: rgba(255, 255, 255, 0.35);
+  text-decoration: line-through;
+}
+
+.whyGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.whyCard {
+  @include liquid-glass;
+  border-radius: 20px;
+  padding: 2rem;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.iconBox {
+  @include liquid-glass-strong;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: auto;
+}
+
+.statsGlass {
+  @include liquid-glass;
+  border-radius: 1.5rem;
+  padding: 3rem 2rem;
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  text-align: center;
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.statNum {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  color: #fff;
+}
+
+.statLabel {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
+  font-weight: 300;
+}
+
+.quoteGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.quoteCard {
+  @include liquid-glass;
+  border-radius: 20px;
+  padding: 2rem 2.5rem;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.quoteText {
+  font-family: var(--font-heading);
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.35;
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  margin: 0;
+}
+
+.quoteRule {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+}
+
+.quoteName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.quoteRole {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 300;
+}
+
+.finalInner {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 10rem 1.5rem;
+}
+
+.finalTitle {
+  font-family: var(--font-heading);
+  font-style: italic;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  margin: 0 0 1.5rem;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  max-width: 800px;
+}
+
+.finalActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btnWhite {
+  background: #fff;
+  color: #000;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background 0.2s;
+  &:hover {
+    background: rgba(255, 255, 255, 0.9);
+  }
+}
+
+.footerBar {
+  position: relative;
+  z-index: 10;
+  margin-top: 8rem;
+  padding: 2rem 1.5rem 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+.copy {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.75rem;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 1.5rem;
+  a {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.75rem;
+    transition: color 0.2s;
+    &:hover {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+}
