@@ -34,6 +34,8 @@
 
 **若构建报「找不到 vite / typescript」等：** 检查 Vercel 项目 **Environment Variables** 里是否把 **`NODE_ENV=production`** 设成了全局；该变量会在 **`npm install` 阶段** 就生效，导致 **不安装 `devDependencies`**。解决办法：删掉该变量，或把 Install Command 改成 `npm install --production=false`（见 [Vercel 说明](https://vercel.com/guides/dependencies-from-package-json-missing-after-install)）。本仓库已将 **Vite / TypeScript / Sass 等放进 `dependencies`**，一般可避免因上述配置导致的安装失败。
 
+**若安装阶段报 `npm error Exit handler never called`：** 多为 CI 上 `npm install` 偶发 bug 或资源压力。仓库已改为在 **`vercel.json`** 里使用 **`npm ci --no-audit --no-fund`**，并在 **`.npmrc`** 中关闭 audit/fund、限制并发，通常更稳。部署页里 **Install Command 可以保持 Override 关闭**（以仓库 `vercel.json` 为准）。无关的环境变量（如截图里的 `EXAMPLE_NAME`）建议删掉，避免干扰排查。
+
 ### CLI（可选）
 
 ```bash
